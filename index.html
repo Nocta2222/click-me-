@@ -1,0 +1,185 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>For Baobao</title>
+
+<!-- Google Font: Lustria -->
+<link href="https://fonts.googleapis.com/css2?family=Lustria&display=swap" rel="stylesheet">
+
+<style>
+body {
+    margin: 0;
+    font-family: 'Lustria', serif;
+    background: white;
+    height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.page {
+    display: none;
+    background: #fff5f8;
+    padding: 50px;
+    border-radius: 20px;
+    max-width: 600px;
+    box-shadow: 0 0 20px rgba(0,0,0,0.05);
+    text-align: center;
+    border: 2px solid #f3c4d6;
+    position: relative;
+}
+
+.page.active {
+    display: block;
+}
+
+h1 {
+    color: #d94f70;
+}
+
+p {
+    color: #444;
+    line-height: 1.6;
+}
+
+button {
+    margin-top: 25px;
+    padding: 14px 30px;
+    font-size: 18px;
+    border: none;
+    border-radius: 10px;
+    background: #f3a7bd;
+    color: white;
+    cursor: pointer;
+    font-family: 'Lustria', serif;
+    transition: all 0.2s ease;
+}
+
+#noBtn {
+    background: #ccc;
+    color: #555;
+    position: absolute;
+}
+
+.flower {
+    position: absolute;
+    font-size: 30px;
+    opacity: 0.6;
+}
+.top-left { top: -10px; left: -10px; }
+.top-right { top: -10px; right: -10px; }
+.bottom-left { bottom: -10px; left: -10px; }
+.bottom-right { bottom: -10px; right: -10px; }
+
+a {
+    color: #d94f70;
+    font-weight: bold;
+    text-decoration: none;
+}
+a:hover { text-decoration: underline; }
+</style>
+</head>
+
+<body>
+
+<div class="page active" id="page1">
+    <div class="flower top-left">✿</div>
+    <div class="flower top-right">❀</div>
+    <div class="flower bottom-left">❀</div>
+    <div class="flower bottom-right">✿</div>
+
+    <h1>Hi Baobao</h1>
+    <p>Please play this song first</p>
+    <a href="https://open.spotify.com/track/4iVj0UxqLlgrFWNdOnCwFS?si=8ea05b89c4ac42fd" target="_blank">
+        Click here to play the song
+    </a>
+    <br>
+    <button onclick="goTo(2)">Next</button>
+</div>
+
+<div class="page" id="page2">
+    <div class="flower top-left">✿</div>
+    <div class="flower top-right">❀</div>
+    <div class="flower bottom-left">❀</div>
+    <div class="flower bottom-right">✿</div>
+
+    <h1>For you</h1>
+    <p>
+        Hi bao, ever since we have found each other again, my days have been so much better 
+        (even though you ragebait me all the time).  
+        Spending my days with you is one of the best things I have done and will never regret.  
+        I may not have time for you on Valentine's, but you know me; I'll try my best to find time 
+        for you, always.  
+        One of my greatest choices was to get in touch with you once more.  
+        I'm such a hypocrite, I told myself I'll move from you and I already moved on from you 
+        but here I am making a website just for you.  
+        I just wanna ask you this one thing.
+    </p>
+    <button onclick="goTo(3)">Next</button>
+</div>
+
+<div class="page" id="page3">
+    <div class="flower top-left">✿</div>
+    <div class="flower top-right">❀</div>
+    <div class="flower bottom-left">❀</div>
+    <div class="flower bottom-right">✿</div>
+
+    <h1>Baobao, will you be my Valentine?</h1>
+    <p>From Yael</p>
+
+    <button id="yesBtn" onclick="yes()">Yes</button>
+    <button id="noBtn" onclick="nope()">No</button>
+</div>
+
+<script>
+let noSize = 18;
+let yesSize = 18;
+
+let noBtn;
+let yesBtn;
+
+function goTo(n) {
+    document.querySelectorAll(".page").forEach(p => p.classList.remove("active"));
+    document.getElementById("page" + n).classList.add("active");
+
+    if (n === 3) {
+        noBtn = document.getElementById("noBtn");
+        yesBtn = document.getElementById("yesBtn");
+    }
+}
+
+function nope() {
+    // Shrink NO
+    noSize -= 2;
+    if (noSize < 8) noSize = 8;
+    noBtn.style.fontSize = noSize + "px";
+
+    // Grow YES 💖
+    yesSize += 6;
+    yesBtn.style.fontSize = yesSize + "px";
+    yesBtn.style.padding =
+        (14 + yesSize / 5) + "px " + (30 + yesSize / 3) + "px";
+
+    // Move NO randomly
+    let x = Math.random() * (window.innerWidth - 150);
+    let y = Math.random() * (window.innerHeight - 80);
+
+    noBtn.style.position = "fixed";
+    noBtn.style.left = x + "px";
+    noBtn.style.top = y + "px";
+}
+
+function yes() {
+    document.body.innerHTML = `
+        <div style="text-align:center; font-family:'Lustria', serif;">
+            <h1 style="color:#d94f70;">YAY!</h1>
+            <p>Thank you for saying yes hehe</p>
+            <p>Happy Valentine’s Day BaoBao</p>
+        </div>
+    `;
+}
+</script>
+
+</body>
+</html>
